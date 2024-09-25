@@ -16,7 +16,7 @@ spec:
     spec:  
       containers:  
       - name: dotnet-web-app  
-        image: dotnet-app:latest
+        image: dotnet-app:<BUILD_TAG>
         imagePullPolicy: IfNotPresent
         ports:  
         - containerPort: 80  
