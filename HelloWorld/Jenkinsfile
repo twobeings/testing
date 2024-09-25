@@ -1,28 +1,11 @@
 pipeline {  
     agent any // 或者指定一个具体的agent标签，如果Jenkins环境中有多个agent  
-  
+    triggers {  
+        githubPush() // 监听GitHub push事件  
+    }  
     stages {  
-        stage('Checkout') {  
-            steps {  
-                // 使用Git插件从GitHub拉取代码  
-                // 注意：这里需要配置GitHub仓库URL和凭证
-                checkout scm: [  
-                    $class: 'GitSCM',  
-                    branches: [[name: '*/master']], // 或者其他希望构建的分支  
-                    doGenerateSubmoduleConfigurations: false,  
-                    extensions: [],  
-                    submoduleCfg: [],  
-                    userRemoteConfigs: [[  
-                        url: 'https://github.com/twobeings/testing.git', // GitHub仓库URL  
-                        credentialsId: 'github' // Jenkins中配置的GitHub凭证ID  
-                    ]]  
-                ]  
-            }  
-        }  
-  
         stage('Build') {  
             steps {  
-                // 这里添加构建步骤，比如使用dotnet build  
                 script {  
                     // 切换到包含Dotnet项目的目录（如果Jenkinsfile不在项目根目录）  
                     // sh 'cd dotnet/project'  
@@ -34,6 +17,5 @@ pipeline {
             }  
         }  
   
-        // 可以添加更多的阶段，如测试、部署等  
     }  
 }
