@@ -25,7 +25,7 @@ pipeline {
                 // 这里添加构建步骤，比如使用dotnet build  
                 script {  
                     // 切换到包含Dotnet项目的目录（如果Jenkinsfile不在项目根目录）  
-                    // sh 'cd path/to/your/dotnet/project'  
+                    // sh 'cd dotnet/project'  
                         
                     // 这里假设.NET SDK已安装在Jenkins Agent上  
                     sh 'dotnet restore'  
